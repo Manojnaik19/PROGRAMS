@@ -1,0 +1,128 @@
+package com.example.diapgm3;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class login extends AppCompatActivity {
+    EditText u2,p2;
+    Button b2;
+
+    int count=0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        u2=findViewById(R.id.u2);
+        p2=findViewById(R.id.p2);
+        b2=findViewById(R.id.b2);
+        Bundle bundle=getIntent().getExtras();
+        String uname=bundle.getString("username");
+        String pwd=bundle.getString("password");
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String user=u2.getText().toString();
+                String pass=p2.getText().toString();
+
+                if(user.equals(uname)  &&  pass.equals(pwd)) {
+Toast.makeText(login.this,"success",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    count++;
+                    if(count>=3)
+                    {
+                        b2.setEnabled(false);
+                    }
+                    else
+                    {
+                        Toast.makeText(login.this,"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+    });
+
+
+
+
+
+
+    }
+}
+
+
+
+//signup
+
+
+package com.example.diapgm3;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class signup extends AppCompatActivity {
+    EditText u1,p1;
+    Button b1;
+    String regularExpr="^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!])[A-Za-z\\d@$!]{8,}$";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        u1=findViewById(R.id.u1);
+        p1=findViewById(R.id.p1);
+        b1=findViewById(R.id.b1);
+
+        b1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                String uname=u1.getText().toString();
+                String pwd=p1.getText().toString();
+
+                if(validatePassword(pwd)){
+
+                    Bundle bundle=new Bundle();
+                    bundle.putString("username",uname);
+                    bundle.putString("password",pwd);
+
+                    Intent intent=new Intent(signup.this, login.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+                else
+                {
+                    Toast.makeText(signup.this,"Invalid Password",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
+
+
+    public boolean validatePassword(String pwd){
+        Pattern pattern=Pattern.compile(regularExpr);
+        Matcher matcher=pattern.matcher(pwd);
+        return matcher.matches();
+    }
+}
