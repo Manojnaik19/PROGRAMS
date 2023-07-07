@@ -1,0 +1,200 @@
+package com.example.program2;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import java.util.regex.Pattern;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+//import android.support.v7.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+      Button button0,button1,button2,button3,button4,button5,button6,button7,button8,
+              button9,buttonplus,buttonminus,buttondiv,buttonmul,buttondot,buttonclear,buttoneq;
+    EditText result;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        button0=(Button)findViewById(R.id.button0);
+        button1=(Button)findViewById(R.id.button1);
+        button2=(Button)findViewById(R.id.button2);
+        button3=(Button)findViewById(R.id.button3);
+        button4=(Button)findViewById(R.id.button4);
+        button5=(Button)findViewById(R.id.button5);
+        button6=(Button)findViewById(R.id.button6);
+        button7=(Button)findViewById(R.id.button7);
+        button8=(Button)findViewById(R.id.button8);
+        button9=(Button)findViewById(R.id.button9);
+        buttonplus=(Button)findViewById(R.id.buttonplus);
+        buttonminus=(Button)findViewById(R.id.buttonminus);
+        buttondiv=(Button)findViewById(R.id.buttondiv);
+        buttonmul=(Button)findViewById(R.id.buttonmul);
+        buttondot=(Button)findViewById(R.id.buttondot);
+        buttoneq=(Button)findViewById(R.id.buttoneq);
+        buttonclear=(Button)findViewById(R.id.buttonclear);
+        result=(EditText) findViewById(R.id.result);
+
+       button1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("1");
+            }
+        });
+        button2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("2");
+            }
+        });
+        button3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("3");
+            }
+        });
+        button4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("4");
+            }
+        });
+        button5.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("5");
+            }
+        });
+        button6.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("6");
+            }
+        });
+        button7.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("7");
+            }
+        });
+        button8.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("8");
+            }
+        });
+        button9.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("9");
+            }
+        });
+        button0.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("0");
+            }
+        });
+        buttonplus.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("+");
+            }
+        });
+        buttonminus.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("-");
+            }
+        });
+        buttondiv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("/");
+            }
+        });
+        buttonmul.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append("*");
+            }
+        });
+        buttondot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.append(".");
+            }
+        });
+        buttonclear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result.setText(" ");
+            }
+        });
+
+
+
+        buttoneq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String data = result.getText().toString();
+                if (data.contains("+")) {
+                    String operands[] = data.split(" + ");
+
+                    double val1 = Double.parseDouble(operands[0]);
+                    double val2 = Double.parseDouble(operands[1]);
+                    double res = val1 + val2;
+                    result.setText(String.valueOf(res));
+                }
+
+                if (data.contains("-")) {
+                    String operands[] = data.split(" - ");
+
+                    double val1 = Double.parseDouble(operands[0]);
+                    double val2 = Double.parseDouble(operands[1]);
+                    double res = val1 - val2;
+                    result.setText(String.valueOf(res));
+                }
+                if (data.contains("*")) {
+                    String operands[] = data.split(" * ");
+
+                    double val1 = Double.parseDouble(operands[0]);
+                    double val2 = Double.parseDouble(operands[1]);
+                    double res = val1 * val2;
+                    result.setText(String.valueOf(res));
+                }
+                if (data.contains("/")) {
+                    String operands[] = data.split(" / ");
+
+                    double val1 = Double.parseDouble(operands[0]);
+                    double val2 = Double.parseDouble(operands[1]);
+                    if (val2 == 0) {
+                        Toast.makeText(MainActivity.this, "divide by zero is not possible", Toast.LENGTH_SHORT).show();
+                    }
+                    double res = val1 / val2;
+                    result.setText(String.valueOf(res));
+                }
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+    }
+}
